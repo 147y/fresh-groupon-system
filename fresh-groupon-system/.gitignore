@@ -1,0 +1,16 @@
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+# 忽略本地配置文件（含数据库密码、密钥等）
+application-*.properties
+application-*.yml
+application-*.yaml

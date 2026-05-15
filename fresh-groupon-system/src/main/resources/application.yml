@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    active: local
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  # mapper文件位置
+  mapper-locations: classpath:mapper/*.xml
+  # 实体类包名
+  type-aliases-package: com.fresh.freshgrouponsystem.entity
+  # 驼峰命名
+  configuration:
+    map-underscore-to-camel-case: true
+

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fresh.freshgrouponsystem.mapper.ProductMapper">
+
+    <select id="getProductById" resultType="Product">
+        select * from `product` where id = #{id}
+    </select>
+
+    <insert id="insertProduct">
+        insert into `product` (name, description, image, price, stock, status, create_time) values (#{name}, #{description}, #{image}, #{price}, #{stock}, #{status}, NOW())
+    </insert>
+
+    <delete id="deleteProduct">
+        delete from `product` where id = #{id}
+    </delete>
+
+    <update id="updateProduct">
+        update `product` set name = #{name}, description = #{description}, image = #{image}, price = #{price}, stock = #{stock}, status = #{status}, create_time = NOW(), is_deleted = #{isDeleted} where id = #{id}
+    </update>
+
+    <select id="getAllProducts" resultType="Product">
+        select * from `product` where is_deleted = 0
+    </select>
+
+    <select id="getProductsByName" resultType="Product">
+        select * from `product` where name like concat('%',#{name},'%') and is_deleted = 0
+    </select>
+
+</mapper>
