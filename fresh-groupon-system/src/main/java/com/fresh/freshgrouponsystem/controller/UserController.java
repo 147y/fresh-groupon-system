@@ -1,5 +1,6 @@
 package com.fresh.freshgrouponsystem.controller;
 
+import com.fresh.freshgrouponsystem.common.Result;
 import com.fresh.freshgrouponsystem.entity.User;
 import com.fresh.freshgrouponsystem.service.UserService;
 import com.github.pagehelper.PageHelper;
@@ -16,43 +17,46 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
+    public Result<User> getUserById(@PathVariable Long id) {
+        if (userService.getUserById(id) == null){
+            return Result.error("用户不存在");
+        }
+        return Result.success("查询用户成功", userService.getUserById(id));
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public Result<List<User>> getAllUsers() {
+        return Result.success("查询所有用户成功", userService.getAllUsers());
     }
 
     @GetMapping("/search")
-    public List<User> getUsersByName(@RequestParam String username) {
-        return userService.getUsersByName(username);
+    public Result<List<User>> getUsersByName(@RequestParam String username) {
+        return Result.success("查询用户成功", userService.getUsersByName(username));
     }
 
     @GetMapping("/page")
-    public PageInfo<User> page(
+    public Result<PageInfo<User>> page(
             @RequestParam(defaultValue = "1") Integer pageNum,
             @RequestParam(defaultValue = "10") Integer pageSize
     ) {
         PageHelper.startPage(pageNum, pageSize);
         List<User> list = userService.getAllUsers();
-        return new PageInfo<>(list);
+        return Result.success(new PageInfo<>(list));
     }
 
     @PostMapping
-    public int addUser(@RequestBody User user){
-        return userService.addUser(user);
+    public Result<Integer> addUser(@RequestBody User user){
+        return Result.success("添加用户成功", userService.addUser(user));
     }
 
     @DeleteMapping("/{id}")
-    public int deleteUser(@PathVariable Long id) {
-        return userService.deleteUser(id);
+    public Result<Integer> deleteUser(@PathVariable Long id) {
+        return Result.success("删除用户成功", userService.deleteUser(id));
     }
 
     @PutMapping
-    public int updateUser(@RequestBody User user) {
-        return userService.updateUser(user);
+    public Result<Integer> updateUser(@RequestBody User user) {
+        return Result.success("更新用户成功", userService.updateUser(user));
     }
 
 }

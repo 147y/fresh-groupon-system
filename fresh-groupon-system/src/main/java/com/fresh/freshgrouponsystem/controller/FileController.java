@@ -1,5 +1,6 @@
 package com.fresh.freshgrouponsystem.controller;
 
+import com.fresh.freshgrouponsystem.common.Result;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +20,7 @@ public class FileController {
             + "/src/main/resources/productImg/";
 
     @PostMapping("/upload")
-    public String upload(@RequestParam("file") MultipartFile file) throws IOException {
+    public Result<String> upload(@RequestParam("file") MultipartFile file) throws IOException {
         // 1. 校验文件
         if (file.isEmpty()) {
             throw new RuntimeException("上传的文件不能为空");
@@ -39,6 +40,7 @@ public class FileController {
         file.transferTo(destFile);
 
         // 4. 返回可访问的图片地址（和下面yml配置对应）
-        return "http://localhost:8080/productImg/" + newFileName;
+        String imgUrl = "http://localhost:8080/productImg/" + newFileName;
+        return Result.success("文件上传成功", imgUrl);
     }
 }

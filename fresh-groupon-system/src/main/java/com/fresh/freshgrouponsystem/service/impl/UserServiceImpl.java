@@ -5,7 +5,6 @@ import com.fresh.freshgrouponsystem.mapper.UserMapper;
 import com.fresh.freshgrouponsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
