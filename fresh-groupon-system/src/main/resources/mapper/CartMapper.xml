@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fresh.freshgrouponsystem.mapper.CartMapper">
+
+    <insert id="insertCart">
+        insert into `cart` (user_id, product_id, quantity, create_time) values (#{userId}, #{productId}, #{quantity}, NOW())
+    </insert>
+
+    <delete id="deleteCart">
+        delete from `cart` where id = #{id}
+    </delete>
+
+    <update id="updateCart">
+        update `cart` set quantity = #{quantity}, create_time = NOW() where id = #{id}
+    </update>
+
+    <select id="getCartByUserId" resultType="Cart">
+        select * from `cart` where user_id = #{userId}
+    </select>
+
+    <select id="getCartById" resultType="Cart">
+        select * from `cart` where id = #{id}
+    </select>
+
+    <select id="getCartByUserIdAndProductId" resultType="Cart">
+        select * from `cart` where user_id = #{userId} and product_id = #{productId}
+    </select>
+
+    <select id="selectByIds" resultType="Cart">
+        select * from `cart` where id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <delete id="deleteByIds">
+        delete from `cart` where id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -9,7 +9,7 @@
     </select>
 
     <insert id="insertOrder" useGeneratedKeys="true" keyProperty="id">
-        insert into `orders` (order_no, user_id, total_price, status, create_time) values (#{orderNo}, #{userId}, #{totalPrice}, #{status}, NOW())
+        insert into `orders` (order_no, user_id, total_price, status, create_time,address_id) values (#{orderNo}, #{userId}, #{totalPrice}, #{status}, NOW(), #{addressId})
     </insert>
 
     <delete id="deleteOrder">
