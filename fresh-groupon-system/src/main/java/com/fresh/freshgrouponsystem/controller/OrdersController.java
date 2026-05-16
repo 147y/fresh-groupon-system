@@ -1,6 +1,7 @@
 package com.fresh.freshgrouponsystem.controller;
 
 import com.fresh.freshgrouponsystem.common.Result;
+import com.fresh.freshgrouponsystem.dto.CartDto;
 import com.fresh.freshgrouponsystem.dto.CreateOrderDto;
 import com.fresh.freshgrouponsystem.entity.Orders;
 import com.fresh.freshgrouponsystem.entity.User;
@@ -71,5 +72,10 @@ public class OrdersController {
     @PutMapping
     public Result<Integer> updateOrder(@RequestBody Orders order) {
         return Result.success("更新订单成功",ordersService.updateOrder(order));
+    }
+
+    @PostMapping("/createByCart")
+    public Result<Integer> createOrderByCart(@RequestBody CartDto dto){
+        return Result.success("创建订单成功",ordersService.createOrderByCart(dto));
     }
 }

@@ -1,5 +1,6 @@
 package com.fresh.freshgrouponsystem.service;
 
+import com.fresh.freshgrouponsystem.dto.CartDto;
 import com.fresh.freshgrouponsystem.dto.CreateOrderDto;
 import com.fresh.freshgrouponsystem.entity.Orders;
 import com.fresh.freshgrouponsystem.vo.OrderDetailVo;
@@ -15,5 +16,7 @@ public interface OrdersService {
     List<Orders> getAllOrders();
     List<Orders> getOrdersByUserId(Long userId);
     int createOrder(CreateOrderDto dto);
+
     OrderDetailVo getOrderDetail(Long orderId);
+    int createOrderByCart(CartDto dto);
 }
